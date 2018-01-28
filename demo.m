@@ -1,16 +1,17 @@
 clear,clc;close all;
-tr = imread('TR.jpg');
-tl = imread('TL.jpg');
-llc = imread('LLC.jpg');
-rlc = imread('RLC.jpg');
-gs = imread('GS.jpg');
-% videoName = '118_07182017';
+tr = imread('./sign/TR.jpg');
+tl = imread('./sign/TL.jpg');
+llc = imread('./sign/LLC.jpg');
+rlc = imread('./sign/RLC.jpg');
+gs = imread('./sign/GS.jpg');
+videoName = '118_07182017';
 % feature_field = {'time','speed','GPS_long','GPS_lat','GPS_heading','distance'};
 % event_field = {'TurnLeft','TurnRight','LaneChangeLeft','LaneChangeRight'};
 % data = Dataset(videoName, feature_field, event_field);
 % data = data.segtrip(0.05, 0.05,0.002,'distance');
 % data = data.extractCurvature();
 % data = data.extractVgg19();
+% data = data.appendLabel()
 % result_field = [data.eventField, data.negativeField]
 load('data.mat')
 vidObj =  VideoReader(data.videoPath);
@@ -51,13 +52,13 @@ for sequenceIndex = 1: num_case
        
         index = index + 1;
         img = readFrame(vidObj);
-%          if index<6000
-%             if index >= segData.maxFrame
-%                 break;
-%             else
-%              continue
-%             end
-%          end
+        if index<6000
+            if index >= segData.maxFrame
+                break;
+            else
+                continue
+            end
+        end
         subplot(4,4,[1,2,3,5,6,7,9,10,11,13,14,15]);imshow(img,[]);
         % feature map
         featuremap = activations(vgg_net,img,'conv5_4','OutputAs','channels');
