@@ -1,8 +1,8 @@
 clear,clc;
 videoName = '118_07182017';
 feature_field = {'time','speed','GPS_long','GPS_lat','GPS_heading','distance'};
-event_field = {'TurnLeft','TurnRight','LaneChangeLeft','LaneChangeRight'};
-data = Dataset(videoName, feature_field, event_field);
+event_field = {'TurnLeft','TurnRight'};
+data = Dataset(videoName,feature_field,event_field);
 data = data.reSample('distance', 0.002);
 data = data.extractCurvature();
 % % % % % % % % data = data.reSync();

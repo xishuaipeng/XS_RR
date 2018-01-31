@@ -52,7 +52,6 @@ methods
         obj.timeDelayforVideo = 0;
         obj.negativeField = 'goStraight';
     end
-    
      function obj = readData(varargin)
         obj = varargin{1};
         addpath './OBDExtraction'
@@ -61,7 +60,6 @@ methods
         obj.videoObj = VideoReader(obj.videoPath);
         obj.frameRate = obj.videoObj.FrameRate ;
      end
-     
      function obj = table2data(varargin)
          obj = varargin{1};
          for i = 1:size(obj.logTable ,2)
@@ -71,8 +69,7 @@ methods
          obj.startDistance = obj.logData.distance(1);
          
          obj.logData.distance = obj.logData.distance - obj.startDistance; 
-     end
-      
+      end
       function obj = reSync(varargin)
           obj = varargin{1};
           if numel(varargin)==1
@@ -81,7 +78,6 @@ methods
           obj.timeDelayforVideo = checkIfSync(obj.logData,varargin{2},varargin{3},varargin{4} );
           end
       end
-      
      function obj = appendLabel(varargin)
           obj = varargin{1};
           eventField =  obj.eventField;
@@ -120,8 +116,7 @@ methods
 
             end
           end
-     end
-      
+      end
        function obj = checkLabel(varargin)
           obj = varargin{1};
           x = obj.logData.GPS_long;
@@ -147,10 +142,10 @@ methods
                plot(x(event_start(i):event_end(i)),y(event_start(i):event_end(i)),'.', ...
         'Color', colorBar(label_index), 'MarkerSize', 6);
                end
-           end               
-       end
-      
-       
+           end           
+           
+           
+      end
        function obj = checkSeg(varargin)
            obj = varargin{1};
            color = '.k';
@@ -169,6 +164,7 @@ methods
                else
                    color = '.k';
                end
+               
                if any(strcmp(z,obj.eventField))
                    event_index = find(strcmp(z,obj.eventField) == 1);
                    x_event = x;
@@ -202,7 +198,6 @@ methods
                 obj.segData(i).vgg19 = frame_feature;
            end    
        end
-       
        function obj = extractDrifting(varargin)
            obj = varargin{1};
            segNum = size(obj.segData,2);
